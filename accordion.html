@@ -1,0 +1,21 @@
+<div ui-content-for="title">
+	<span>Near by Bus</span>
+</div>
+<div class="scrollable">
+	<div class="scrollable-content">
+		<div class="section">
+			<div id="map"></div>
+			<div>&nbsp</div>
+			<div class="panel-group" ui-state='myAccordion' ui-default='1'>
+				<div class="panel panel-default" ng-repeat="i in Buses">
+					<div class="panel-heading" ui-set="{'myAccordion': i.num}">
+						<h4 class="panel-title">{{i.name}}</h4>
+					</div>
+					<div ui-if="myAccordion == {{i.num}}">
+						<div class="panel-body"><b>{{i.info}}</b></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
