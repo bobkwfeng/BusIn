@@ -25,31 +25,6 @@
 <script src="demo.js"></script>
 <script src="./dist/js/ng-map.min.js"></script>
 
-
-<script> 
-function myrefresh() 
-{ 
-   window.location.reload(); 
-   loadDoc('http://ec2-52-87-181-156.compute-1.amazonaws.com/bus?latitude=40.443622&longitude=-79.945917', myFunction);
-}
-
-function loadDoc(url, cfunc) {
-	  var xhttp;
-	  xhttp=new XMLHttpRequest();
-	  xhttp.onreadystatechange = function() {
-	    if (xhttp.readyState == 4 && xhttp.status == 200) {
-	      cfunc(xhttp);
-	    }
-	  };
-	  xhttp.open("GET", url, true);
-	  xhttp.send();
-}
-
-function myFunction(xhttp) {
-	  console.log(xhttp.responseText);
-}
-</script>
-
 <style>
 #map2 {
 	height: 300px
@@ -111,6 +86,8 @@ function myFunction(xhttp) {
 </style>
 
 <script>
+var lat1;
+var lot1;
 function initGeolocation() {
 	if (navigator && navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(successCallback,
@@ -126,8 +103,8 @@ function errorCallback() {
 
 function successCallback(position) {
       var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      console.log(position.coords.latitude);
-      console.log(position.coords.longitude);
+      lat1 = position.coords.latitude;
+      lot1 = position.coords.longitude;
       var map_options = {
         zoom: 17,
         center: myLatlng,
@@ -149,8 +126,6 @@ function successCallback(position) {
       }
       map_container = document.getElementById('map');
       var map = new google.maps.Map(map_container, map_options);
-      
-      
       
       
       var input1 = /** @type {!HTMLInputElement} */(
@@ -233,6 +208,46 @@ function successCallback(position) {
 		  calculateAndDisplayRoute(directionsService, directionsDisplay);
 	  });
 }
+
+
+function myrefresh() 
+{  
+   window.location.reload();
+}
+
+function requireTime() 
+{
+	var url = "http://localhost:8080/Test_Mobile/FindBus?latitude="+lat1+"&longitude="+lot1;
+	console.log(url);
+	loadDoc(url, myFunction);
+}
+
+function loadDoc(url, cfunc) {
+	  var xhttp;
+	  xhttp=new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (xhttp.readyState == 4 && xhttp.status == 200) {
+	      cfunc(xhttp);
+	    }
+	  };
+	  xhttp.open("GET", url, true);
+	  xhttp.send();
+}
+
+function myFunction(xhttp) {
+	/* console.log(xhttp.responseText); */
+	var myBus = new Array();
+	myBus = xhttp.responseText.split("<br>");
+	var table="";
+	for(i=0;i<myBus.length;i++) {
+		table += "<div>"+myBus[i].split(";",3)+"</div>";
+	}
+	/* console.log(table); */
+	document.getElementById("timetable").innerHTML = table;
+}
+
+
+
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     var start = document.getElementById('pac-input1').value;
