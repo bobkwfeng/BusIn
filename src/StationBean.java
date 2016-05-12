@@ -36,8 +36,10 @@ public class StationBean {
         this.distance = distance;
     }
     public void setDistance(double latitude, double longitude) {
-        double a = Math.abs(latitude - this.latitude);
-        double b = Math.abs(longitude - this.longitude);
-        this.distance = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    	double a = latitude - this.latitude;
+        double b = longitude - this.longitude;
+        double c = Math.pow(Math.sin(a / 2), 2) + Math.cos(latitude) * Math.cos(this.latitude) * Math.pow(Math.sin(b / 2), 2);
+        double d = 2 * Math.atan2(Math.sqrt(c), Math.sqrt(1 - c));
+        this.distance = d * 6371000;
     }
 }

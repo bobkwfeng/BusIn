@@ -69,7 +69,7 @@ public class HttpUtil {
             Document doc = builder.parse(is);
             NodeList latList = doc.getElementsByTagName("lat");
             NodeList lonList = doc.getElementsByTagName("lon");
-            for (int i = 0; i < list.size(); i++) {
+            for (int i = 0; i < latList.getLength(); i++) {
                 list.get(i).setLatitude(latList.item(i).getTextContent());
                 list.get(i).setLongitude(lonList.item(i).getTextContent());
             }
@@ -131,6 +131,11 @@ public class HttpUtil {
                 list.add(item);
             }
             addLocation(list);
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getLatitude() == null || list.get(i).getLongitude() == null) {
+                    list.remove(i);
+                }
+            }
             return list;
         } catch (ParserConfigurationException e) {
         } catch (SAXException e) {

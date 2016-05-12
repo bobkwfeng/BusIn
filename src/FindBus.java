@@ -30,7 +30,7 @@ public class FindBus extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	    response.setContentType("text/html");
+		response.setContentType("text/html; text/plain;  charset=UTF-8");
 	    PrintWriter out = response.getWriter();
 	    String latitude = request.getParameter("latitude");
 	    String longitude = request.getParameter("longitude");

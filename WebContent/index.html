@@ -212,12 +212,14 @@ function successCallback(position) {
 
 function myrefresh() 
 {  
-   window.location.reload();
+	history.go(0);
+	console.log("refresh");
 }
 
 function requireTime() 
 {
-	var url = "http://localhost:8080/Test_Mobile/FindBus?latitude="+lat1+"&longitude="+lot1;
+  	var url = "http://"+window.location.host+"/Test_Mobile/FindBus?latitude="+lat1+"&longitude="+lot1; 
+	console.log(window.location.host);
 	console.log(url);
 	loadDoc(url, myFunction);
 }
