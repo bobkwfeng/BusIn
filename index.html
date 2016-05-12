@@ -30,7 +30,24 @@
 function myrefresh() 
 { 
    window.location.reload(); 
-} 
+   loadDoc('http://ec2-52-87-181-156.compute-1.amazonaws.com/bus?latitude=40.443622&longitude=-79.945917', myFunction);
+}
+
+function loadDoc(url, cfunc) {
+	  var xhttp;
+	  xhttp=new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+	    if (xhttp.readyState == 4 && xhttp.status == 200) {
+	      cfunc(xhttp);
+	    }
+	  };
+	  xhttp.open("GET", url, true);
+	  xhttp.send();
+}
+
+function myFunction(xhttp) {
+	  console.log(xhttp.responseText);
+}
 </script>
 
 <style>
@@ -109,6 +126,8 @@ function errorCallback() {
 
 function successCallback(position) {
       var myLatlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      console.log(position.coords.latitude);
+      console.log(position.coords.longitude);
       var map_options = {
         zoom: 17,
         center: myLatlng,
