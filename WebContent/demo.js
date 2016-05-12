@@ -292,11 +292,10 @@ app.controller('MainController', function($rootScope, $scope){
   // Right Sidebar
   // 
   $scope.Buses = [
-    {num: 1, name: '61A', online: true , info: 'Inbound Downtown via Oakland' , time: 4},
-    {num: 2, name: '61B', online: true , info: 'Inbound Braddock Swissvale Downtown' , time: 12},
-    {num: 3, name: '61C', online: true , info: 'Inbound McKeesport Homestead' , time: 8},
-    {num: 4, name: '61D', online: true , info: 'Inbound Downtown via Oakland', time: 6},
-    {num: 5, name: '58', online: false , info: 'Inbound to Downtown' , time: '-'}
+    {num: 1, name: 'Forbes Avenue / Hamburg Hall', online: true , info: 'Inbound Downtown via Oakland' , time: 4},
+    {num: 2, name: 'Forbes Avenue / Beeler St', online: true , info: 'Inbound Braddock Swissvale Downtown' , time: 12},
+    {num: 3, name: 'Forbes Avenue / Plainfield St', online: true , info: 'Inbound McKeesport Homestead' , time: 8},
+    {num: 4, name: 'Forbes Avenue / Wightman', online: true , info: 'Inbound Downtown via Oakland', time: 6},
   ];
 
   //
